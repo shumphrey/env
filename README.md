@@ -5,6 +5,7 @@ Installation
 ------------
 
 checkout the repository somewhere
+
     git clone git@github.com:shumphrey/env.git
 
  

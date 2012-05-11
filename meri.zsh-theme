@@ -19,7 +19,7 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} ✭"
 ## % is # if root. Some colours
 RPROMPT='$(git_prompt_info) %f%{$reset_color%}'
 PROMPT='%F{green}%~
-%F{208}%n%f%{$fg_bold[white]%}@%F{039}%m%f%{$reset_color%}%#%b '
+%F{208}%n%f%{$fg[white]%}@%F{12}%m%f%{$reset_color%}%#%b '
 
 
 ## Add crazy prompt character functions

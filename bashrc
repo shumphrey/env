@@ -24,7 +24,7 @@ elif [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-# Set terminal prompty
+# Set terminal prompt
 PS1="${debian_chroot:+($debian_chroot)}${GREEN}\u${RESET}@${RED}\h${RESET}:${BOLDBLUE}\w${RESET}\$ "
 
 # some more ls aliases
@@ -36,8 +36,8 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-
-export PERLBREW_ROOT=/opt/perl5
+# Perl env stuff
+source ~/.env/perl.sh
 
 alias si='screen -dr Irssi'
 

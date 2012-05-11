@@ -25,6 +25,7 @@ elif [ -x /usr/bin/dircolors ]; then
 fi
 
 # Set terminal prompt
+# TODO: Import work PS1 here
 PS1="${debian_chroot:+($debian_chroot)}${GREEN}\u${RESET}@${RED}\h${RESET}:${BOLDBLUE}\w${RESET}\$ "
 
 # some more ls aliases

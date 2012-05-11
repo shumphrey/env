@@ -6,7 +6,8 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Random until I create my own
-ZSH_THEME="random"
+#ZSH_THEME="meri"
+#ZSH_THEME="random"
 
 # I have no trouble using the correct case in completion
 # So it showing me extra stuff is annoying

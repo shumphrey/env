@@ -36,6 +36,7 @@ alias l='ls -CF --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias please='sudo'
 
 # Perl env stuff
 source ~/.env/perl.sh

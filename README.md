@@ -1,11 +1,17 @@
 MY ENV FILES
+============
 
 Installation
+------------
 
- checkout the repository somewhere
+checkout the repository somewhere
 
-bashrc
+    git clone git@github.com:shumphrey/env.git
+
  
- echo "source ~/.env/bashrc" >> ~/.bashrc
 
+### bashrc
+ 
+    echo "source ~/env/bashrc" >> ~/.bashrc
 
+To use solarized, your terminal needs to set `$TERM` to `xterm-256colours`

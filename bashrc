@@ -40,6 +40,3 @@ alias please='sudo'
 
 # Perl env stuff
 source ~/.env/perl.sh
-
-alias si='screen -dr Irssi'
-

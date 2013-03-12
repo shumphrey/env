@@ -20,7 +20,32 @@ plugins=(git perl svn github cpanm)
 
 source $ZSH/oh-my-zsh.sh
 
+#############################
+## Aliases
+#############################
+
 alias please="sudo"
+
+##############################
+## git
+##############################
+
+alias gpo="git push origin"
+alias d="git difftool"
+unalias g # what sets this?
+
+# git default to status
+function g {
+    if [[ $# > 0 ]]; then
+        git $@
+    else
+        git status --short --branch
+    fi
+}
+
+##############################
+## perl
+##############################
 
 # Include perl stuff
 source ~/.env/perl.sh

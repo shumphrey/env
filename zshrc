@@ -1,6 +1,8 @@
 ##########################
 ## oh-my-zsh settings
 ##########################
+DISABLE_AUTO_UPDATE="true"
+
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
@@ -19,6 +21,8 @@ CASE_SENSITIVE="true"
 plugins=(git perl svn github cpanm)
 
 source $ZSH/oh-my-zsh.sh
+
+unsetopt CORRECT_ALL;
 
 #############################
 ## Aliases
@@ -39,7 +43,7 @@ function g {
     if [[ $# > 0 ]]; then
         git $@
     else
-        git status --short --branch
+        git status
     fi
 }
 

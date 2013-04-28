@@ -8,7 +8,7 @@ DISABLE_AUTO_UPDATE="true"
 ZSH=$HOME/.oh-my-zsh
 
 # Random until I create my own
-#ZSH_THEME="meri"
+ZSH_THEME="meri"
 #ZSH_THEME="random"
 
 # I have no trouble using the correct case in completion
@@ -53,3 +53,7 @@ function g {
 
 # Include perl stuff
 source ~/.env/perl.sh
+
+## theme needs 256 colours. Don't think I'll use one with less colours
+export TERM='xterm-256color'
+

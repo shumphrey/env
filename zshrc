@@ -29,6 +29,7 @@ unsetopt CORRECT_ALL;
 #############################
 
 alias please="sudo"
+alias v="vim"
 
 ##############################
 ## git
@@ -36,7 +37,7 @@ alias please="sudo"
 
 alias gpo="git push origin"
 alias d="git difftool"
-unalias g # what sets this?
+unalias g # need to look into removing oh-my-zsh
 
 # git default to status
 function g {

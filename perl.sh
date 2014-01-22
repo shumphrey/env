@@ -1,5 +1,6 @@
 ## Run 5 tests at a time in colour
-export HARNESS_OPTIONS="j5:c"
+#export HARNESS_OPTIONS="j5:c"
+export HARNESS_OPTIONS="c"
 
 ## Always use cpanm
 alias cpan="cpanm"
@@ -22,15 +23,8 @@ function t {
   fi
 }
 
-## I store all my projects in a directory called projects
-## Auto set PERL5LIB to those libs
-for dir in ~/Projects/*/lib
-do
-    PLIBS=( ${PLIBS[@]}":$dir" )
-done
-export PERL5LIB="${PLIBS[@]}"
 
-## Use perlbrew
+# Use perlbrew
 if [[ -d "/opt/perl5" ]]; then
     export PERLBREW_ROOT=/opt/perl5
 fi

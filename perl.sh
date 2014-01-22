@@ -33,5 +33,7 @@ export PERL5LIB="${PLIBS[@]}"
 ## Use perlbrew
 if [[ -d "/opt/perl5" ]]; then
     export PERLBREW_ROOT=/opt/perl5
+else
+    export PERLBREW_ROOT=~/perl5/perlbrew
 fi
 source $PERLBREW_ROOT/etc/bashrc

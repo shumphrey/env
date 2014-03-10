@@ -1,0 +1,12 @@
+#compdef tm
+
+_tm() {
+    local curcontext="$curcontext" session line
+    typeset -A opt_args
+
+    _arguments '*: :->sessions'
+
+    sessions=($(tmux list-sessions -F "#{session_name}"))
+    compadd $sessions
+}
+

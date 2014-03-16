@@ -8,4 +8,4 @@ gconftool-2 --set "/apps/gnome-terminal/profiles/Default/background_color" --typ
 gconftool-2 --set "/apps/gnome-terminal/profiles/Default/foreground_color" --type string "#838394949696"
 
 
-
+sh solarized.sh

@@ -6,6 +6,11 @@ export HARNESS_OPTIONS="c"
 alias cpan="cpanm"
 export PERL_CPANM_OPT="--prompt"
 
+## open perl module in vim
+function pv {
+    vim `mpath $1`
+}
+
 ## Handy pretty print TAP test function
 function t {
   VENDOR_LIBS=""

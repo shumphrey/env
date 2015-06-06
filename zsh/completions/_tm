@@ -1,0 +1,13 @@
+#compdef tm
+
+_tm() {
+    _arguments '*:: :->' && return 0
+
+    if (( CURRENT == 1 )); then
+        local -a sessions
+        sessions=($(tmux list-sessions -F "#{session_name}"))
+        compadd $sessions
+        return
+    fi
+}
+

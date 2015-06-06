@@ -37,6 +37,7 @@ compinit
 #############################
 
 alias please="sudo"
+alias ffs="sudo"
 alias v="vim"
 
 ##############################
@@ -87,3 +88,5 @@ bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
 bindkey "${terminfo[kcuu1]}" history-beginning-search-backward
 bindkey "${terminfo[kcud1]}" history-beginning-search-forward
+
+export EDITOR=vim

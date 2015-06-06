@@ -1,0 +1,47 @@
+# vim: set filetype=yaml ts=2 sw=2:
+rules:
+  indent:               [2,4]        # error: 4 spaces
+  linebreak-style:      [2,'unix']
+  semi:                 [2,'always'] # Always enforce semi colons
+
+  quotes:               [0] # I don't care whether quotes are ' or "
+  no-multi-spaces:      [0] # I like formatting my lines with extra spaces
+  space-unary-ops:      [1] # Make builtins with () be a warning
+  no-underscore-dangle: [0] # _private should be allowed
+  key-spacing:          [0] # I like spacing out my properties to align
+  comma-dangle:         [0] # this is BS. trailing commas is ECMA5
+  camelcase:            [0] # I'd like to have it so that properties are checked,
+                            # variables are not, but it doesn't allow that
+  no-console:           [0] # Whilst I agree with no console.log on production
+                            # it's too annoying to use. ESLint on jenkins?
+  no-extend-native: # I quite like messing with native prototypes
+    - 2             # I realise it might be seen as hacky...
+    -
+      exceptions:
+        - Array     # So I'll just allow Array for now
+  no-undef:         # I really need to sort out how I do exports etc.
+                    # Stop using window/global
+    - 0
+  no-unused-vars:   # similarly, because I declare functions globally,
+                    # I need to not whine about unused global functions
+    - 2             # Need to stop using global namespace
+    - 
+      vars: local
+      args: after-used
+env:
+  es6: true
+  browser: true
+globals:
+  define: false
+  module: false
+  $: false
+# ecmaFeatures:
+#   classes: true
+#   forOf: true
+#   jsx: true
+#   modules: true
+#   arrowFunctions: true
+#   blockBindings: true
+#   defaultParams: true
+#   destructuring: true
+#   generators: true

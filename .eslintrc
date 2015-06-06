@@ -14,11 +14,13 @@ rules:
                             # variables are not, but it doesn't allow that
   no-console:           [0] # Whilst I agree with no console.log on production
                             # it's too annoying to use. ESLint on jenkins?
+  no-alert:             [0] # Ditto
   no-extend-native: # I quite like messing with native prototypes
     - 2             # I realise it might be seen as hacky...
     -
       exceptions:
         - Array     # So I'll just allow Array for now
+        - Number    # And number!
   no-undef:         # I really need to sort out how I do exports etc.
                     # Stop using window/global
     - 0

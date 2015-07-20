@@ -40,3 +40,12 @@ alias please='sudo'
 
 # Perl env stuff
 source ~/.env/perl.sh
+
+# git default to status
+function g {
+    if [[ $# > 0 ]]; then
+        git $@
+    else
+        git status
+    fi
+}

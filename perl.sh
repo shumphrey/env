@@ -34,4 +34,10 @@ if [[ -d "/opt/perl5" ]]; then
 else
     export PERLBREW_ROOT=~/perl5/perlbrew
 fi
-source $PERLBREW_ROOT/etc/bashrc
+
+if [[ -f "$PERLBREW_ROOT/etc/bashrc " ]]
+then
+    source $PERLBREW_ROOT/etc/bashrc
+fi
+
+alias p="perl -E"

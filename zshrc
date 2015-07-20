@@ -44,8 +44,6 @@ alias v="vim"
 ## git
 ##############################
 
-alias gpo="git push origin"
-alias d="git difftool"
 unalias g # need to look into removing oh-my-zsh
 
 # git default to status
@@ -90,3 +88,9 @@ bindkey "${terminfo[kcuu1]}" history-beginning-search-backward
 bindkey "${terminfo[kcud1]}" history-beginning-search-forward
 
 export EDITOR=vim
+
+export PAGER="less -r -X"
+alias less="less -r -X"
+
+## Why would I ever want to run perl without new features enabled
+alias p="perl -E"

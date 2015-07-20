@@ -35,7 +35,7 @@ else
     export PERLBREW_ROOT=~/perl5/perlbrew
 fi
 
-if [[ -f "$PERLBREW_ROOT/etc/bashrc " ]]
+if [[ -f "$PERLBREW_ROOT/etc/bashrc" ]]
 then
     source $PERLBREW_ROOT/etc/bashrc
 fi

@@ -1,3 +1,7 @@
+##############################
+## perl
+##############################
+
 ## Run 5 tests at a time in colour
 #export HARNESS_OPTIONS="j5:c"
 export HARNESS_OPTIONS="c"

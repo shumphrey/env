@@ -1,6 +1,10 @@
 #!/bin/bash
 #
-# A git commit hook that rejects linter failures and other failures.
+# A git commit hook that rejects:
+#  - perl linter failures
+#  - js linter failures
+#  - whitespace errors
+#  - perl debug line errors
 #
 # Called by "git commit" with no arguments.  The hook should
 # exit with non-zero status after issuing an appropriate message if
@@ -57,3 +61,9 @@ do
         fi
     fi
 done
+
+################################
+## Check for whitespace errors
+################################
+exec git diff-index --check --cached HEAD --
+

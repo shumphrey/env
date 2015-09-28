@@ -12,6 +12,9 @@
 #
 # To enable this hook, rename this file to ".git/hooks/pre-commit".
 
+## 'git diff --staged' - shows the difference between previous and staged commit
+## 'git show :$file'   - shows the contents of staged file
+
 FILES=`git diff --staged --name-only`
 for file in $FILES
 do
@@ -23,27 +26,36 @@ do
     ################################
     ## PERL TESTS
     ################################
-    if [ ${file: -3} == ".pm" ]
-    then
-        ## Check for Data::Printer
-        OUT=`git diff --staged $file | ack "(use Data::Printer|use DDP)"`
-        if [ "$OUT" ]
-        then
-            echo "Error: Found Data::Printer in $file"
-            exit 1
-        fi
-    fi
 
     if [ ${file: -3} == ".pm" ] || [ ${file: -3} == ".pl" ] || [ ${file: -2} == '.t' ]
     then
+        ## Make sure it passes perl syntax check
+        OUT=`git show :$file | perl -c`
+        if [ $? != 0 ]
+        then
+            echo "REJECT: $file fails syntax check"
+            echo $OUT
+            exit 1
+        fi
+
+        ## Check for Data::Printer
+        OUT=`git diff --staged $file | ack "(use Data::Printer|use DDP|\$DB::single)"`
+        if [ "$OUT" ]
+        then
+            echo "REJECT: $file contains Data::Printer"
+            exit 1
+        fi
+
         ## perlcritic all perl FILES
         OUT=`git show :$file | perlcritic --quiet`
         if [ "$OUT" ]
         then
-            echo $file
+            echo "REJECT: $file fails perlcritc"
             echo $OUT
             exit 1
         fi
+
+        ## Continue on to next change (don't run js tests)
         continue
     fi
 
@@ -55,7 +67,7 @@ do
         OUT=`git show :$file | eslint --stdin`
         if [ "$OUT" ]
         then
-            echo $file
+            echo "REJECT: $file fails eslint"
             echo $OUT
             exit 1
         fi

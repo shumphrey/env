@@ -10,6 +10,9 @@ if [[ "${terminfo[knp]}" != "" ]]; then
   bindkey "${terminfo[knp]}" down-line-or-history     # [PageDown] - Down a line of history
 fi
 
+bindkey "\e[1~" beginning-of-line
+bindkey "\e[4~" end-of-line
+
 # start typing + [Up-Arrow] - fuzzy find history forward
 if [[ "${terminfo[kcuu1]}" != "" ]]; then
   autoload -U up-line-or-beginning-search

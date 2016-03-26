@@ -1,6 +1,7 @@
 # zsh theme requires 256 color enabled terminal
 # i.e TERM=xterm-256color
-# WORK IN PROGRESS
+
+setopt prompt_subst
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{154}±|%f%F{124}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"

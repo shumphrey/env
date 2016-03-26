@@ -6,9 +6,8 @@ Installation
 
 checkout the repository somewhere
 
-    git clone git@github.com:shumphrey/env.git
-
+    git clone git@github.com:shumphrey/env.git ~/.env
 
 ### ZSH
  
-    echo "source ~/env/zshrc" >> ~/.zshrc
+    echo "source ~/.env/zsh/zshrc" >> ~/.zshrc

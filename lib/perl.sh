@@ -6,6 +6,9 @@
 #export HARNESS_OPTIONS="j5:c"
 export HARNESS_OPTIONS="c"
 
+# always do pretty print db profiling
+export DBIC_TRACE_PROFILE="console"
+
 ## Always use cpanm
 alias cpan="cpanm"
 export PERL_CPANM_OPT="--prompt"

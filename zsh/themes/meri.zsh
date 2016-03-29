@@ -6,17 +6,10 @@ setopt prompt_subst
 REDF="%f%F{124}"
 GREENF="%f%F{154}"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{154}±|%f%F{124}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{154}±|%f%F{030}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}✘%b%F{154}|%f%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green}✔%F{154}|"
-
-# ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%} ✚"
-# ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%} ✹"
-# ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%} ✖"
-# ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%} ➜"
-# ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%} ═"
-# ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} ✭"
+ZSH_THEME_GIT_PROMPT_DIRTY=" %F{009}✘%b%F{154}"
+ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green}✔%F{154}"
 
 # Outputs if current branch is behind remote
 function git_prompt_behind() {
@@ -34,14 +27,37 @@ function git_prompt_ahead() {
   fi
 }
 
+# Outputs current branch info in prompt format
+function git_prompt_info() {
+  local ref
+  ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+  ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
+  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+}
+
+# Checks if working tree is dirty
+function parse_git_dirty() {
+  local STATUS=''
+  local FLAGS
+  FLAGS=('--porcelain')
+  if [[ $POST_1_7_2_GIT -gt 0 ]]; then
+    FLAGS+='--ignore-submodules=dirty'
+  fi
+  if [[ "$DISABLE_UNTRACKED_FILES_DIRTY" == "true" ]]; then
+    FLAGS+='--untracked-files=no'
+  fi
+  STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
+  if [[ -n $STATUS ]]; then
+    echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
+  else
+    echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+  fi
+}
+
+
 ## ~/my/path/relative/to/home
 ## user@host%                                                  (git info)
 ## % is # if root. Some colours
-RPROMPT='$(git_prompt_info)$(git_prompt_ahead)$(git_prompt_behind) %f%{$reset_color%}'
+RPROMPT='$(git_prompt_info)$(git_prompt_ahead)$(git_prompt_behind)'
 PROMPT='%F{green}%~
 %F{208}%n%f%{$fg[white]%}@%F{blue}%m%f%{$reset_color%}%#%b '
-
-
-## Add crazy prompt character functions
-## e.g., different character for git, svn, normal, other?
-# TODO:

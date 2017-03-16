@@ -7,9 +7,10 @@ REDF="%f%F{124}"
 GREENF="%f%F{154}"
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{154}±|%f%F{030}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY=" %F{009}✘%b%F{154}"
-ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green}✔%F{154}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%b%F{154}|"
+ZSH_THEME_GIT_PROMPT_DIRTY=" %F{009}✘"
+ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green}✔"
+ZSH_THEME_GIT_PROMPT_STASH="%F{009}◎"
 
 # Outputs if current branch is behind remote
 function git_prompt_behind() {
@@ -32,7 +33,15 @@ function git_prompt_info() {
   local ref
   ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
   ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+
+  # if we've got here, we're in a git repo
+  local TEXT="$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}"
+  local AHEAD=$(git_prompt_ahead)
+  local BEHIND=$(git_prompt_behind)
+  local STASH=$(git_stash_count)
+  local DIRTY=$(parse_git_dirty)
+
+  echo "$STASH$TEXT$DIRTY$AHEAD$BEHIND$ZSH_THEME_GIT_PROMPT_SUFFIX"
 }
 
 # Checks if working tree is dirty
@@ -54,10 +63,18 @@ function parse_git_dirty() {
   fi
 }
 
+function git_stash_count() {
+    local COUNT
+    COUNT=$(git stash list 2>/dev/null | wc -l)
+    if [[ $COUNT > 0 ]]; then
+        echo "$ZSH_THEME_GIT_PROMPT_STASH$COUNT %F{154}|%F{$reset_color}"
+    fi
+}
+
 
 ## ~/my/path/relative/to/home
 ## user@host%                                                  (git info)
 ## % is # if root. Some colours
-RPROMPT='$(git_prompt_info)$(git_prompt_ahead)$(git_prompt_behind)'
+RPROMPT='$(git_prompt_info)'
 PROMPT='%F{green}%~
 %F{208}%n%f%{$fg[white]%}@%F{blue}%m%f%{$reset_color%}%#%b '

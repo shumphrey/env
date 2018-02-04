@@ -29,7 +29,7 @@ function git_prompt_ahead() {
 }
 
 # Outputs current branch info in prompt format
-function git_prompt_info() {
+function my_prompt_info() {
   local ref
   ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
   ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
@@ -75,6 +75,6 @@ function git_stash_count() {
 ## ~/my/path/relative/to/home
 ## user@host%                                                  (git info)
 ## % is # if root. Some colours
-RPROMPT='$(git_prompt_info)'
+RPROMPT='$(my_prompt_info)'
 PROMPT='%F{green}%~
 %F{208}%n%f%{$fg[white]%}@%F{blue}%m%f%{$reset_color%}%#%b '

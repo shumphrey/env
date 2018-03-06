@@ -36,10 +36,10 @@ function my_prompt_info() {
 
   # if we've got here, we're in a git repo
   local TEXT="$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}"
-  local AHEAD=$(git_prompt_ahead)
-  local BEHIND=$(git_prompt_behind)
-  local STASH=$(git_stash_count)
-  local DIRTY=$(parse_git_dirty)
+  local AHEAD="$(git_prompt_ahead)"
+  local BEHIND="$(git_prompt_behind)"
+  local STASH="$(git_stash_count)"
+  local DIRTY="$(parse_git_dirty)"
 
   echo "$STASH$TEXT$DIRTY$AHEAD$BEHIND$ZSH_THEME_GIT_PROMPT_SUFFIX"
 }

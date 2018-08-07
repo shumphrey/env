@@ -18,10 +18,17 @@ source ~/.env/zsh/themes/meri.zsh
 ## My own completions
 ##############################
 
+## my own stuff!
 fpath=(~/.env/zsh/completions $fpath)
 autoload -U compinit
 compinit
 compdef '_dispatch git git' g
+source ~/.env/zsh/completions/_git_extras
+
+## emulate bash completions?
+autoload -U bashcompinit
+bashcompinit
+eval "$(bash-complete setup | grep -v perldoc)"
 
 ######################################
 ## Aliases + Functions + Key Bindings

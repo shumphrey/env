@@ -5,9 +5,9 @@
 for libfile (~/.env/zsh/lib/*.zsh); do
     source $libfile
 done
-source ~/.env/lib/perl.sh
-source ~/.env/lib/nodejs.sh
-source ~/.env/lib/solarized.sh
+for libfile (~/.env/lib/*.sh); do
+    source $libfile
+done
 
 ##############################
 ## Theme

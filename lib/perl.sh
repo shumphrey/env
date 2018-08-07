@@ -47,4 +47,7 @@ then
     source $PERLBREW_ROOT/etc/bashrc
 fi
 
+export PATH="$HOME/.plenv/bin:$PATH"
+eval "$(plenv init -)"
+
 alias p="perl -E"

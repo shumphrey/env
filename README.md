@@ -7,6 +7,8 @@ In particular, my zsh settings.
 My zsh settings are largely inspired by oh-my-zsh.
 Check out oh-my-zsh or prezto if new to zsh.
 
+My vim settings can be found here [https://github.com/shumphrey/vimrc](vimrc settings)
+
 Installation
 ------------
 

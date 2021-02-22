@@ -64,6 +64,8 @@
 [diff]
     tool = vimdiff
     guitool = vscode
+    # apply different colours to lines that were moved
+    colorMoved = default
 [difftool]
     prompt = false
 [difftool "vscode"]

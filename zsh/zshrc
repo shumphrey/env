@@ -2,18 +2,32 @@
 ## Include Files
 ##############################
 
+# Set homebrew zsh completions
+# already there
+# if command -v brew >/dev/null 2>&1; then
+    # export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+# fi
+
 # e.g. zsh/lib/completions
-for libfile (~/.env/zsh/lib/*.zsh); do
-    source $libfile
-done
-for libfile (~/.env/lib/*.sh); do
-    source $libfile
-done
+source ~/.env/zsh/lib/bindings.zsh
+source ~/.env/zsh/lib/history.zsh
+source ~/.env/zsh/lib/directories.zsh
+source ~/.env/zsh/lib/directory_hook.zsh
+source ~/.env/zsh/lib/misc.zsh
+source ~/.env/zsh/lib/completion.zsh
+source ~/.env/zsh/lib/aws.zsh
+
+source ~/.env/lib/nodejs.sh
+source ~/.env/lib/solarized.sh
+# for libfile (~/.env/lib/*.sh); do
+#     source $libfile
+# done
 
 ##############################
 ## Theme
 ##############################
 
+source ~/.env/lib/solarized.sh
 source ~/.env/zsh/themes/meri.zsh
 
 ######################################
@@ -24,7 +38,8 @@ alias please="sudo"
 alias ffs="sudo"
 alias v="vim"
 alias less="less -r -X"
-alias gbr='vim +:Gbrowse +qa'
+alias gbr='vim +:GBrowse +qa'
+alias ls="ls --color=auto"
 
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then

@@ -80,6 +80,8 @@
     instructionFormat = "%s (%an)"
     autosquash = true
     autostash = true
+[push]
+    autoSetupRemote = true
 [pull]
     rebase = true
 [fetch]

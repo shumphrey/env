@@ -4,17 +4,27 @@
 
 setopt prompt_subst
 
+# with prompt_subst on
+# %F - start using foreground color
+# %f - stop using foreground color
+# can use $reset_color also
+
 local REDF="%f%F{124}"
 local GREENF="%f%F{154}"
+local CYANF="%f%F{030}"
+local ORANGEF="%f%F{009}"
+local BLUEF="%f%F{blue}"
 
-local ZSH_THEME_GIT_PROMPT_PREFIX="%F{154}|%f%F{030}"
-local ZSH_THEME_GIT_PROMPT_SUFFIX="%b%F{154}|"
-local ZSH_THEME_GIT_PROMPT_STASH="%F{009}◎"
+local GREEN_DIV="$GREENF|$reset_color"
+local GIT_STASH_SYMBOL="◎"
+local GIT_BEHIND_SYMBOL="⬇"
+local GIT_AHEAD_SYMBOL="⬆"
+local JOB_COUNT_SYMBOL="⚒"
 
 # Outputs if there are background jobs in the terminal
 function job_count() {
   if [ -n "$(jobs -p)" ]; then
-    echo "$REDF$(jobs -p| grep -v ".*pwd now.*" | wc -l)⚒ $reset_color";
+    echo "$REDF$(jobs -p| grep -v ".*pwd now.*" | wc -l)$JOB_COUNT_SYMBOL$reset_color";
   fi
 }
 
@@ -22,7 +32,7 @@ function job_count() {
 function git_stash_count() {
   local COUNT=$(git stash list 2>/dev/null | wc -l)
   if [[ $COUNT > 0 ]]; then
-    echo "$ZSH_THEME_GIT_PROMPT_STASH$COUNT %F{154}|%F{$reset_color}"
+    echo "$ORANGEF$COUNT$GIT_STASH_SYMBOL"
   fi
 }
 
@@ -30,7 +40,7 @@ function git_stash_count() {
 function git_prompt_behind() {
   git_behind_count=$(git rev-list ..@{u} 2>/dev/null | wc -l)
   if [[ "$git_behind_count" != "0" ]]; then
-    echo "%F{red}${git_behind_count}⬇"
+    echo "$REDF${git_behind_count}$GIT_BEHIND_SYMBOL"
   fi
 }
 
@@ -38,7 +48,7 @@ function git_prompt_behind() {
 function git_prompt_ahead() {
   git_ahead_count=$(git rev-list @{u}.. 2>/dev/null | wc -l)
   if [[ "$git_ahead_count" != "0" ]]; then
-    echo "%F{blue}${git_ahead_count}⬆"
+    echo "$BLUEF${git_ahead_count}$GIT_AHEAD_SYMBOL"
   fi
 }
 
@@ -49,16 +59,16 @@ function my_git_info() {
   ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
 
   # if we've got here, we're in a git repo
-  local TEXT="$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}"
+  local TEXT="$CYANF${ref#refs/heads/}"
   local AHEAD="$(git_prompt_ahead)"
   local BEHIND="$(git_prompt_behind)"
 
-  echo -n "$TEXT$AHEAD$BEHIND$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  echo -n "$GREEN_DIV$TEXT$AHEAD$BEHIND$GREEN_DIV"
 }
 
 ## ~/my/path/relative/to/home
 ## user@host%                                                  (git info)
 ## % is # if root. Some colours
-RPROMPT='$(job_count)$(git_stash_count)$(my_git_info)'
+RPROMPT='$(job_count) $(git_stash_count)$(my_git_info)'
 PROMPT='%F{green}%~
 %F{208}%n%f%{$fg[white]%}@%F{blue}%m%f%{$reset_color%}%#%b '

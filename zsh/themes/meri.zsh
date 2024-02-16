@@ -12,6 +12,13 @@ ZSH_THEME_GIT_PROMPT_DIRTY=" %F{009}✘"
 ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green}✔"
 ZSH_THEME_GIT_PROMPT_STASH="%F{009}◎"
 
+# prints if their are background jobs in the terminal
+function job_count() {
+  if [ -n "$(jobs -p)" ]; then
+    echo "$REDF$(jobs -p| grep -v ".*pwd now.*" | wc -l)⚒ $reset_color";
+  fi
+}
+
 # Outputs if current branch is behind remote
 function git_prompt_behind() {
   git_behind_count=$(git rev-list ..@{u} 2>/dev/null | wc -l)
@@ -30,6 +37,8 @@ function git_prompt_ahead() {
 
 # Outputs current branch info in prompt format
 function my_prompt_info() {
+  echo -n "$(job_count)"
+
   local ref
   ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
   ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0

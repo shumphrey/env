@@ -56,6 +56,13 @@
     ours = "!f() { git checkout --ours $@ && git add $@; }; f"
     theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
 
+    # Nuke local and remote branch
+    nuke = !sh -c 'git branch -D $1 && git push origin :$1' -
+
+    pushnotes = "!git push origin refs/notes/commits"
+    pullnotes = "!git fetch origin refs/notes/commits:refs/notes/commits"
+    setupnotes = "!git config --add remote.origin.fetch '+refs/notes/*:refs/notes/*'"
+
     # reset main/master from origin
     setmain = remote set-head origin -a
 [core]

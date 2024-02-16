@@ -67,6 +67,8 @@
     setmain = remote set-head origin -a
 [core]
     excludesfile = ~/.env/git/ignore
+[branch]
+    sort = -committerdate
 [merge]
     log = 20
     tool = vimdiff

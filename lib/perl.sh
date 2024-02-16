@@ -42,12 +42,13 @@ else
     export PERLBREW_ROOT=~/perl5/perlbrew
 fi
 
-if [[ -f "$PERLBREW_ROOT/etc/bashrc" ]]
-then
+if [[ -f "$PERLBREW_ROOT/etc/bashrc" ]]; then
     source $PERLBREW_ROOT/etc/bashrc
 fi
 
-export PATH="$HOME/.plenv/bin:$PATH"
-eval "$(plenv init -)"
+if type plenv > /dev/null; then
+    export PATH="$HOME/.plenv/bin:$PATH"
+    eval "$(plenv init -)"
+fi
 
 alias p="perl -E"

@@ -1,4 +1,6 @@
 # vim: set ts=8 sw=4 et:
+# [include]
+#   path = ~/.env/git/config
 [github]
     user = shumphrey
 [color]

@@ -72,7 +72,9 @@ bindkey "${terminfo[kcuu1]}" history-beginning-search-backward
 bindkey "${terminfo[kcud1]}" history-beginning-search-forward
 
 ## theme needs 256 colours. Don't think I'll use one with less colours
-export TERM='xterm-256color'
+# apparently the correct way to do this is to set the following in tmux
+# set-option -g default-terminal "screen-256color"
+# export TERM='xterm-256color'
 export EDITOR=vim
 # -r allow all control codes through, but breaks some rendering, -R allow only colours
 # -F quit if only 1 screen

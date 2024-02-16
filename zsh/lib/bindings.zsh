@@ -34,6 +34,7 @@ if [[ "${terminfo[kend]}" != "" ]]; then
 fi
 
 bindkey ' ' magic-space                               # [Space] - do history expansion
+                                                      # !1<space> - expands first history item
 
 bindkey '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word                       # [Ctrl-LeftArrow] - move backward one word
@@ -57,4 +58,5 @@ zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 
 # file rename magick
-bindkey "^[m" copy-prev-shell-word
+bindkey "^[m" copy-prev-shell-word                    # [Alt-m] - copy previous argument, useful for file rename
+                                                      #         - e.g. mv file.txt <alt-m>.bak

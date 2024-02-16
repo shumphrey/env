@@ -1,0 +1,70 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+continuation_prompt = "▶▶"
+# add_newline = false
+
+format = """\
+╭╴$all\
+╰─$jobs$sudo$character"""
+
+command_timeout=1000
+
+# right_format = """$status"""
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character]
+success_symbol = "[➤](bold green)"
+error_symbol = "[➤](bold red)"
+
+[docker_context]
+disabled=true
+
+[nodejs]
+disabled=true
+
+[java]
+disabled=true
+
+[package]
+disabled=true
+
+# don't display python version info
+# but do display it if we're using virtualenv?
+[python]
+detect_files=[]
+detect_extensions=[]
+
+[username]
+# show_always=true
+# style_user="fg:208"
+style_user="blue"
+
+[directory]
+truncate_to_repo=false
+# home_symbol = ""
+truncation_symbol = "…"
+truncation_length = 4
+style="fg:208"
+
+[git_branch]
+# symbol = " "
+# format = "on [$symbol$branch]($style) "
+# truncation_length = 20
+# truncation_symbol = "…"
+style = "blue"
+
+[git_status]
+# format = '[\($all_status$ahead_behind\)]($style) '
+# style = "bold green"
+# conflicted = "🏳"
+# up_to_date = " "
+# untracked = "[](bold red) "
+untracked = ""
+# ahead = "⇡${count}"
+# diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+# behind = "⇣${count}"
+stashed = "\\$${count}"
+# modified = "[]($bold red) "
+# staged = '[++\($count\)](green)'
+# renamed = "襁 "
+# deleted = " "

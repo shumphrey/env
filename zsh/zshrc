@@ -2,12 +2,6 @@
 ## Include Files
 ##############################
 
-# Set homebrew zsh completions
-# already there
-# if command -v brew >/dev/null 2>&1; then
-    # export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-# fi
-
 # e.g. zsh/lib/completions
 source ~/.env/zsh/lib/bindings.zsh
 source ~/.env/zsh/lib/history.zsh
@@ -19,7 +13,9 @@ source ~/.env/zsh/lib/aws.zsh
 
 source ~/.env/lib/nodejs.sh
 source ~/.env/lib/python.sh
+source ~/.env/lib/ruby.sh
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source ~/.env/fzf/*.zsh
 
 # disable tab cycling through a menu
@@ -108,3 +104,6 @@ if command -v starship >/dev/null; then
     export STARSHIP_CONFIG=~/.env/starship.toml
     eval "$(starship init zsh)"
 fi
+
+# Add my ~/bin to the PATH
+export PATH="$HOME/bin:$PATH"

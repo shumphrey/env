@@ -1,21 +1,28 @@
+# vim: set ts=2 sw=2 et:
 # zsh theme requires 256 color enabled terminal
 # i.e TERM=xterm-256color
 
 setopt prompt_subst
 
-REDF="%f%F{124}"
-GREENF="%f%F{154}"
+local REDF="%f%F{124}"
+local GREENF="%f%F{154}"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{154}±|%f%F{030}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%b%F{154}|"
-ZSH_THEME_GIT_PROMPT_DIRTY=" %F{009}✘"
-ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green}✔"
-ZSH_THEME_GIT_PROMPT_STASH="%F{009}◎"
+local ZSH_THEME_GIT_PROMPT_PREFIX="%F{154}|%f%F{030}"
+local ZSH_THEME_GIT_PROMPT_SUFFIX="%b%F{154}|"
+local ZSH_THEME_GIT_PROMPT_STASH="%F{009}◎"
 
-# prints if their are background jobs in the terminal
+# Outputs if there are background jobs in the terminal
 function job_count() {
   if [ -n "$(jobs -p)" ]; then
     echo "$REDF$(jobs -p| grep -v ".*pwd now.*" | wc -l)⚒ $reset_color";
+  fi
+}
+
+# Outputs if I have git stashes
+function git_stash_count() {
+  local COUNT=$(git stash list 2>/dev/null | wc -l)
+  if [[ $COUNT > 0 ]]; then
+    echo "$ZSH_THEME_GIT_PROMPT_STASH$COUNT %F{154}|%F{$reset_color}"
   fi
 }
 
@@ -35,10 +42,8 @@ function git_prompt_ahead() {
   fi
 }
 
-# Outputs current branch info in prompt format
-function my_prompt_info() {
-  echo -n "$(job_count)"
-
+# Outputs current git info in prompt format
+function my_git_info() {
   local ref
   ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
   ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
@@ -47,43 +52,13 @@ function my_prompt_info() {
   local TEXT="$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}"
   local AHEAD="$(git_prompt_ahead)"
   local BEHIND="$(git_prompt_behind)"
-  local STASH="$(git_stash_count)"
-  local DIRTY="$(parse_git_dirty)"
 
-  echo "$STASH$TEXT$DIRTY$AHEAD$BEHIND$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  echo -n "$TEXT$AHEAD$BEHIND$ZSH_THEME_GIT_PROMPT_SUFFIX"
 }
-
-# Checks if working tree is dirty
-function parse_git_dirty() {
-  local STATUS=''
-  local FLAGS
-  FLAGS=('--porcelain')
-  if [[ $POST_1_7_2_GIT -gt 0 ]]; then
-    FLAGS+='--ignore-submodules=dirty'
-  fi
-  if [[ "$DISABLE_UNTRACKED_FILES_DIRTY" == "true" ]]; then
-    FLAGS+='--untracked-files=no'
-  fi
-  STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
-  if [[ -n $STATUS ]]; then
-    echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
-  else
-    echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
-  fi
-}
-
-function git_stash_count() {
-    local COUNT
-    COUNT=$(git stash list 2>/dev/null | wc -l)
-    if [[ $COUNT > 0 ]]; then
-        echo "$ZSH_THEME_GIT_PROMPT_STASH$COUNT %F{154}|%F{$reset_color}"
-    fi
-}
-
 
 ## ~/my/path/relative/to/home
 ## user@host%                                                  (git info)
 ## % is # if root. Some colours
-RPROMPT='$(my_prompt_info)'
+RPROMPT='$(job_count)$(git_stash_count)$(my_git_info)'
 PROMPT='%F{green}%~
 %F{208}%n%f%{$fg[white]%}@%F{blue}%m%f%{$reset_color%}%#%b '

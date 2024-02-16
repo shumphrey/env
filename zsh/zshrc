@@ -18,10 +18,13 @@ source ~/.env/zsh/lib/completion.zsh
 source ~/.env/zsh/lib/aws.zsh
 
 source ~/.env/lib/nodejs.sh
-source ~/.env/lib/solarized.sh
-# for libfile (~/.env/lib/*.sh); do
-#     source $libfile
-# done
+source ~/.env/lib/python.sh
+
+source ~/.env/fzf/*.zsh
+
+# disable tab cycling through a menu
+# list of items still appears for information, but now I need to type more letters
+setopt NO_AUTO_MENU
 
 ##############################
 ## Theme
@@ -95,3 +98,13 @@ export EDITOR=vim
 # -F quit if only 1 screen
 # -X don't clear the screen?
 export PAGER="less -R -X -F"
+
+# Run gpg-agent for our gpg signing
+if command -v gpg-agent >/dev/null; then
+    gpg-agent --daemon 2> /dev/null
+fi
+
+if command -v starship >/dev/null; then
+    export STARSHIP_CONFIG=~/.env/starship.toml
+    eval "$(starship init zsh)"
+fi

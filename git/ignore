@@ -7,3 +7,4 @@ __pycache__
 .vimrc
 .idea
 .netrwhist
+.node-version

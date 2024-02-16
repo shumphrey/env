@@ -65,7 +65,7 @@
     tool = vimdiff
     # I want a merge into master to contain a merge commit
     # Rebasing branches all the time, but merge into master
-    # merge commits link back to PRs 
+    # merge commits link back to PRs
     ff = false
 [diff]
     tool = vimdiff

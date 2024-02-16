@@ -46,7 +46,7 @@ if [[ -f "$PERLBREW_ROOT/etc/bashrc" ]]; then
     source $PERLBREW_ROOT/etc/bashrc
 fi
 
-if type plenv > /dev/null; then
+if [[ -d $HOME/.plenv/bin ]]; then
     export PATH="$HOME/.plenv/bin:$PATH"
     eval "$(plenv init -)"
 fi

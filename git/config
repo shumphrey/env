@@ -1,0 +1,98 @@
+# vim: set ts=8 sw=4 et:
+[github]
+    user = shumphrey
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+[alias]
+    co = checkout
+    br = branch
+    st = status
+    d = difftool
+    m = mergetool
+    pushf = push --force-with-lease
+    fudge = rebase -i @~2
+
+    # Nice graphed log
+    lg = log --graph --color=always --pretty=format:'%Cred%h %C(green)(%cr)%Creset %C(blue)%d %C(yellow)%aN%n%s%n%b'
+
+    # Rebase on top of origin's master
+    up = !git fetch origin --prune && git rebase origin/master
+
+    # GitHub - Checkout a PR
+    pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
+
+    # Gitlab - Checkout an MR
+    mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+
+    # List contributors with number of commits
+    contributors = shortlog --summary --numbered
+
+    # Amend the currently staged files to the latest commit
+    amend = commit --amend --reuse-message=HEAD
+
+    # Credit an author on the latest commit
+    credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+
+    # Find branches containing commit
+    fb = "!f() { git branch -a --contains $1; }; f"
+
+    # Find tags containing commit
+    ft = "!f() { git describe --always --contains $1; }; f"
+
+    # Find commits by source code
+    fc = "!f() { git log --pretty=format:'%C(yellow)%h	%Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+
+    # Find commits by commit message
+    fm = "!f() { git log --pretty=format:'%C(yellow)%h	%Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+    # In merge conflicts, discard ours or theirs
+    ours = "!f() { git checkout --ours $@ && git add $@; }; f"
+    theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+[core]
+    excludesfile = ~/.env/git/ignore
+[merge]
+    log = 20
+    tool = vimdiff
+    # I want a merge into master to contain a merge commit
+    # Rebasing branches all the time, but merge into master
+    # merge commits link back to PRs 
+    ff = false
+[diff]
+    tool = vimdiff
+    guitool = vscode
+[difftool]
+    prompt = false
+[difftool "vscode"]
+    cmd = code -n --wait --diff "$LOCAL" "$REMOTE"
+[status]
+    submoduleSummary = true
+    showStash = true
+[rebase]
+    instructionFormat = "%s (%an)"
+    autosquash = true
+    autostash = true
+[pull]
+    rebase = true
+[fetch]
+    prune = true
+[commit]
+    # show diff in comments at bottom of commit message
+    verbose = true
+[log]
+    follow = true
+    abbrevCommit = true
+[url "git@github.com"]
+    insteadOf = "github"
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+[url "git@gitlab.com:"]
+    insteadOf = gl:
+[help]
+    # autoapply spelling corrections to commands after 1s
+    autocorrect = 10
+[rerere]
+    # automatically remember merge conficts and reapply their resolutions
+    enabled = true
+    autoupdate = true

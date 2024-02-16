@@ -1,0 +1,9 @@
+.DS_Store
+*.swp
+.ctags.d
+tags
+.zsh-hooks
+__pycache__
+.vimrc
+.idea
+.netrwhist

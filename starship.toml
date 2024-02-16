@@ -4,7 +4,7 @@ continuation_prompt = "▶▶"
 # add_newline = false
 
 format = """\
-╭╴$all\
+╭╴$all$aws${env_var.AWS_ACCOUNT_ALIAS}$cmd_duration$line_break\
 ╰─$jobs$sudo$character"""
 
 command_timeout=1000
@@ -23,6 +23,9 @@ disabled=true
 disabled=true
 
 [java]
+disabled=true
+
+[rust]
 disabled=true
 
 [package]
@@ -68,3 +71,22 @@ stashed = "\\$${count}"
 # staged = '[++\($count\)](green)'
 # renamed = "襁 "
 # deleted = " "
+
+[golang]
+disabled = true
+
+[ruby]
+disabled = true
+
+[env_var.SOLR_HOST]
+description = "The SOLR_HOST discovery tooling will use"
+format = '[$env_value](fg:red) '
+
+[aws]
+format = 'on [$symbol(\[$duration\] )($profile )]($style)'
+style = 'yellow'
+
+[env_var.AWS_ACCOUNT_ALIAS]
+description = "The local account alias"
+format = "[$env_value]($style) "
+style = 'yellow'

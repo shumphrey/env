@@ -1,7 +1,16 @@
 
+fpath=(~/.env/zsh/completions $fpath)
 # Use modern completion system
 autoload -Uz compinit
-compinit
+
+setopt extendedglob
+if [[ -n $HOME/.zcompdump(#qN.mh+24) ]]; then
+    echo "regenerating completions"
+    compinit
+else
+    compinit -C
+fi
+setopt noextendedglob
 
 setopt auto_menu
 setopt complete_in_word
@@ -28,3 +37,15 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
         usbmux uucp vcsa wwwrun xfs '_*'
 
 zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
+
+
+compdef '_dispatch git git' g
+source ~/.env/zsh/completions/_git_extras
+
+## emulate bash completions?
+# autoload -U bashcompinit
+# bashcompinit
+# if type bash-complete > /dev/null; then
+#     eval "$(bash-complete setup | grep -v perldoc)"
+# fi
+

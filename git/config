@@ -22,6 +22,9 @@
     # Nice graphed log
     lg = log --graph --color=always --pretty=format:'%Cred%h %C(green)(%cr)%Creset %C(blue)%d %C(yellow)%aN%n%s%n%b'
 
+    # non indented log I can lazily copy text from
+    flg = log --color=always --pretty=format:'%Cred%h %C(green)(%cr)%Creset %C(blue)%d %C(yellow)%aN%n%s%n%b'
+
     # Rebase on top of origin's master
     up = !git fetch origin --prune && git rebase origin/$(git main)
 
@@ -94,6 +97,8 @@
     insteadOf = "github"
 [url "git@github.com:"]
     insteadOf = https://github.com/
+[url "git@github.com:"]
+    insteadOf = gh:
 [url "git@gitlab.com:"]
     insteadOf = gl:
 [help]

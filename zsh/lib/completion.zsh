@@ -4,8 +4,8 @@ fpath=(~/.env/zsh/completions $fpath)
 autoload -Uz compinit
 
 setopt extendedglob
-if [[ -n $HOME/.zcompdump(#qN.mh+24) ]]; then
-    echo "regenerating completions"
+if [[ -n $HOME/.zcompdump(#qN.mh+96) ]]; then
+    echo "Regenerating completions as ~/.zcompdump(#qN.mh+24) is older than 96 hours"
     compinit
 else
     compinit -C

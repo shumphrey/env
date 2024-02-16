@@ -8,8 +8,8 @@ setopt inc_append_history
 setopt share_history # share command history data
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=100000
+SAVEHIST=2000
 HISTFILE=~/.zsh_history
 
 alias history='fc -il 1'

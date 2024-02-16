@@ -55,6 +55,9 @@
     # In merge conflicts, discard ours or theirs
     ours = "!f() { git checkout --ours $@ && git add $@; }; f"
     theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+
+    # reset main/master from origin
+    setmain = remote set-head origin -a
 [core]
     excludesfile = ~/.env/git/ignore
 [merge]

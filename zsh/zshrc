@@ -15,24 +15,6 @@ done
 
 source ~/.env/zsh/themes/meri.zsh
 
-##############################
-## My own completions
-##############################
-
-## my own stuff!
-fpath=(~/.env/zsh/completions $fpath)
-autoload -U compinit
-compinit
-compdef '_dispatch git git' g
-source ~/.env/zsh/completions/_git_extras
-
-## emulate bash completions?
-autoload -U bashcompinit
-bashcompinit
-if type bash-complete > /dev/null; then
-    eval "$(bash-complete setup | grep -v perldoc)"
-fi
-
 ######################################
 ## Aliases + Functions + Key Bindings
 ######################################
@@ -94,3 +76,32 @@ export EDITOR=vim
 # -F quit if only 1 screen
 # -X don't clear the screen?
 export PAGER="less -R -X -F"
+
+
+##############################
+## My own completions
+##############################
+
+## my own stuff!
+fpath=(~/.env/zsh/completions $fpath)
+autoload -Uz compinit
+# osx disk super slow, encryption? APFS?
+# https://jb-blog.readthedocs.io/en/latest/posts/0032-debugging-zsh-startup-time.html
+setopt extendedglob
+if [[ -n $HOME/.zcompdump(#qN.mh+24) ]]; then
+    compinit
+else
+    compinit -C
+fi
+setopt noextendedglob
+
+compdef '_dispatch git git' g
+source ~/.env/zsh/completions/_git_extras
+
+## emulate bash completions?
+autoload -U bashcompinit
+bashcompinit
+if type bash-complete > /dev/null; then
+    eval "$(bash-complete setup | grep -v perldoc)"
+fi
+

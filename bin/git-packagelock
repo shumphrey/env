@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+rm -rf package-lock.json node_modules && npm install && git add package-lock.json

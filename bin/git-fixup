@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [ "$1" ]; then
+    git commit --fixup $@
+else
+    git log --oneline --no-merges -n 20 | fzf | cut -d ' ' -f 1 | xargs git commit --no-verify --fixup
+fi

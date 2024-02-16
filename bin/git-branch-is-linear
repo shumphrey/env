@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -e
+
+RED='\033[0;31m'
+RESET='\033[0m'
+
+# This only runs on PRs, ensure we aren't master
+BRANCH=$(git branch --show-current)
+
+if [[ "$BRANCH" == "master" ]]; then
+    echo -e "${RED}Do not run on master${RESET}"
+    exit 127;
+fi
+
+# Get the most recent common ancester of this branch and master
+ANCESTOR=$(git merge-base master @)
+
+# count the number of merge commits since this branch was branched off master
+MERGE_COMMITS=$(git log --oneline --merges $ANCESTOR..@| wc -l)
+
+# A linear history should have 0 merge commits
+if [[ "$MERGE_COMMITS" != "0" ]]; then
+    echo -e "${RED}ERROR: there are merge commits in branch ${BRANCH}${RESET}"
+    echo "Please rebase your branch"
+    echo "https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History"
+    exit 1;
+fi

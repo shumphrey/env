@@ -106,4 +106,4 @@ if command -v starship >/dev/null; then
 fi
 
 # Add my ~/bin to the PATH
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.env/bin:$HOME/bin:$PATH"

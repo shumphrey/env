@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [ "$1" ]; then
+    git rebase -i $@
+else
+    EDITOR=true
+    git log --oneline --no-merges -n 20 | fzf | cut -d ' ' -f 1 | xargs -I{} git rebase --autosquash -i {}^
+fi

@@ -16,11 +16,14 @@
     pushf = push --force-with-lease
     fudge = rebase -i @~2
 
+    # Work out the name of main branch
+    main = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+
     # Nice graphed log
     lg = log --graph --color=always --pretty=format:'%Cred%h %C(green)(%cr)%Creset %C(blue)%d %C(yellow)%aN%n%s%n%b'
 
     # Rebase on top of origin's master
-    up = !git fetch origin --prune && git rebase origin/master
+    up = !git fetch origin --prune && git rebase origin/$(git main)
 
     # GitHub - Checkout a PR
     pr = !"pr() { git fetch origin pull/$1/head:pr-$1; git checkout pr-$1; }; pr"

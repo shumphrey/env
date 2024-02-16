@@ -72,6 +72,8 @@
     guitool = vscode
     # apply different colours to lines that were moved
     colorMoved = default
+    # make git diff consider unlimited number of files in rename detection
+    renameLimit = 0
 [difftool]
     prompt = false
 [difftool "vscode"]

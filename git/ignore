@@ -8,3 +8,4 @@ __pycache__
 .idea
 .netrwhist
 .node-version
+.ackrc

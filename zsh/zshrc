@@ -24,6 +24,7 @@ alias please="sudo"
 alias ffs="sudo"
 alias v="vim"
 alias less="less -r -X"
+alias gbr='vim +:Gbrowse +qa'
 
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then

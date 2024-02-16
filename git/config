@@ -76,6 +76,8 @@
     # Rebasing branches all the time, but merge into master
     # merge commits link back to PRs
     ff = false
+[mergetool]
+    keepBackup = false
 [diff]
     tool = vimdiff
     guitool = vscode

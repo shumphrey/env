@@ -17,7 +17,7 @@
     main = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
 
     # Nice graphed log
-    lg = log --graph --color=always --pretty=format:'%Cred%h %C(green)(%cr)%Creset %C(blue)%d %C(yellow)%aN%n%s%n%b'
+    lg = log --graph --color=always --pretty=format:'%Cred%h %C(green)(%cr)%Creset %C(blue)%d %C(yellow)%ae%n%s%n%b'
 
     # non indented log I can lazily copy text from
     flg = log --color=always --pretty=format:'%Cred%h %C(green)(%cr)%Creset %C(blue)%d %C(yellow)%aN%n%s%n%b'

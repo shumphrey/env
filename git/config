@@ -104,6 +104,7 @@
     rebase = true
 [fetch]
     prune = true
+    writeCommitGraph = true
 [commit]
     # show diff in comments at bottom of commit message
     verbose = true

@@ -96,6 +96,8 @@
     instructionFormat = "%s (%an)"
     autosquash = true
     autostash = true
+    # automatically update stacked branches
+    updateRefs = true
 [push]
     autoSetupRemote = true
 [pull]

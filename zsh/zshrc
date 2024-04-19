@@ -16,7 +16,10 @@ source ~/.env/lib/python.sh
 source ~/.env/lib/ruby.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source ~/.env/fzf/*.zsh
+for f in ~/.env/fzf/*.zsh; do
+    [ -e "$f" ] || continue
+    source $f
+done
 
 # disable tab cycling through a menu
 # list of items still appears for information, but now I need to type more letters

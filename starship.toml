@@ -85,6 +85,7 @@ format = '[$env_value](fg:red) '
 [aws]
 format = 'on [$symbol(\[$duration\] )($profile )]($style)'
 style = 'yellow'
+force_display = true
 
 [env_var.AWS_ACCOUNT_ALIAS]
 description = "The local account alias"

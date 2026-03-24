@@ -34,9 +34,6 @@
     # List contributors with number of commits
     contributors = shortlog --summary --numbered
 
-    # Amend the currently staged files to the latest commit
-    amend = commit --amend --reuse-message=HEAD
-
     # Credit an author on the latest commit
     credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
 

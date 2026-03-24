@@ -10,7 +10,14 @@ aws-config-reader() {
     if [[ $line =~ '^\[profile' ]]; then
       profile=$(echo "$line"| sed 's/\[profile \(.*\)\]/\1/g')
     elif [[ $line =~ '^credential_process' ]]; then
-      local account_id=$(echo "$line" | grep -Eo '\d+')
+      local account_id=$(echo "$line" | grep -Eo '\d\d+')
+      # try extracting from gobbc?
+      if [[ "$account_id" == "" ]]; then
+        account_id=$(gobbc list-aws-account-aliases 2>/dev/null| grep $profile | sed "s/.* //")
+      fi
+      if [[ "$account_id" == "" ]]; then
+        account_id="..."
+      fi
       aws_profiles[$profile]=$account_id
     fi
   done < ~/.aws/config

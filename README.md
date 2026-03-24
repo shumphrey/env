@@ -2,10 +2,7 @@
 =====================================
 
 This is a collection of my environment files.
-In particular, my zsh, git, tmux settings.
-
-My zsh settings are largely inspired by oh-my-zsh.
-Check out oh-my-zsh or prezto if new to zsh.
+In particular, zsh, git and tmux settings.
 
 My vim settings can be found here [vimrc settings](https://github.com/shumphrey/vimrc)
 

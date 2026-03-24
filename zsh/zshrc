@@ -92,7 +92,7 @@ bindkey "${terminfo[kcud1]}" history-beginning-search-forward
 # apparently the correct way to do this is to set the following in tmux
 # set-option -g default-terminal "screen-256color"
 # export TERM='xterm-256color'
-export EDITOR=vim
+export EDITOR=nvim
 # -r allow all control codes through, but breaks some rendering, -R allow only colours
 # -F quit if only 1 screen
 # -X don't clear the screen?

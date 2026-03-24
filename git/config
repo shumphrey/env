@@ -68,7 +68,8 @@
     sort = -committerdate
 [merge]
     log = 20
-    tool = vimdiff
+    ; tool = vimdiff
+    tool = nvimdiff
     # I want a merge into master to contain a merge commit
     # Rebasing branches all the time, but merge into master
     # merge commits link back to PRs
@@ -76,7 +77,7 @@
 [mergetool]
     keepBackup = false
 [diff]
-    tool = vimdiff
+    tool = neovim
     guitool = vscode
     # apply different colours to lines that were moved
     colorMoved = default
@@ -86,6 +87,10 @@
     prompt = false
 [difftool "vscode"]
     cmd = code -n --wait --diff "$LOCAL" "$REMOTE"
+[difftool "neovim"]
+    cmd = nvim -d "$LOCAL" "$REMOTE"
+[mergetool "nvimdiff"]
+    layout = "LOCAL,BASE,REMOTE / MERGED"
 [status]
     submoduleSummary = true
     showStash = true

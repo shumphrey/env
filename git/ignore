@@ -9,3 +9,5 @@ __pycache__
 .netrwhist
 .node-version
 .ackrc
+venv/
+.aider*
